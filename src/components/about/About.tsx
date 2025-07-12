@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between gap-8 h-fit p-4 md:p-8 bg-green-100">
-        {/* Image */}
+       
         <div className="w-full md:w-1/2 flex items-center">
           <img
             src={ClinicManager}
@@ -13,7 +13,6 @@ const About = () => {
           />
         </div>
 
-        {/* Text Content */}
         <div className="w-full md:w-1/2 border-2 border-gray-300 rounded-lg p-6 md:p-8 mb-6 md:mb-0">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-700">
             About MediBook
