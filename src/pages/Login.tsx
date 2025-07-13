@@ -6,120 +6,116 @@ import { loginAPI } from '../features/login/loginAPI';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../features/users/userSlice';
-import {toast} from 'sonner';
-
-
-
+import { toast } from 'sonner';
 
 type LoginInputs = {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 };
 
 const schema = yup.object({
-    email: yup.string().email('Invalid email').max(100, 'Max 100 characters').required('Email is required'),
-    password: yup.string().min(6, 'Min 6 characters').max(255, 'Max 255 characters').required('Password is required'),
+  email: yup.string().email('Invalid email').max(100, 'Max 100 characters').required('Email is required'),
+  password: yup.string().min(6, 'Min 6 characters').max(255, 'Max 255 characters').required('Password is required'),
 });
 
 function Login() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const emailFromState = location.state?.email || '';
-    const [loginUser, {isLoading}] = loginAPI.useLoginUserMutation(); 
-    
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<LoginInputs>({
-        resolver: yupResolver(schema),
-        defaultValues: {
-            email: emailFromState,
-        },
-    });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const emailFromState = location.state?.email || '';
+  const [loginUser, { isLoading }] = loginAPI.useLoginUserMutation();
 
-    const onSubmit: SubmitHandler<LoginInputs> = async(data) => {
-        console.log('Login data:', data);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInputs>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: emailFromState,
+    },
+  });
 
+  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+    console.log('Login data:', data);
 
+    try {
+      const response = await loginUser(data).unwrap();
+      dispatch(
+        loginSuccess({
+          token: response.token,
+          user: response.user,
+        })
+      );
+      console.log('Login successful:', response);
+      toast.success('Login successful! Redirecting to dashboard...');
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Login failed. Please check your credentials and try again.', error);
+      toast.error('Login failed. Please check your credentials and try again.');
+    }
+  };
 
-        try {
-            const response = await loginUser(data).unwrap();
-             dispatch(loginSuccess({
-             token: response.token,
-             user: response.user,
-             
-    }));
-            console.log('Login successful:', response);
-            toast.success('Login successful! Redirecting to dashboard...');
-         
-            if (response.user.role === 'admin') {
-                navigate('/admin/dashboard/cars');
-            } else if (response.user.role === 'user') {
-                navigate('/user/dashboard/bookings');
-            }
-            
-        } catch (error) {
-            console.error('Login failed. Please check your credentials and try again.', error);
-            toast.error('Login failed. Please check your credentials and try again.');
-            
-        }
-        
-    };
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-yellow-900 via-amber-700 to-yellow-800">
+      <div className="w-full max-w-lg p-8 rounded-xl shadow-2xl bg-white">
+        <h1 className="text-3xl font-extrabold mb-6 text-center text-amber-800">
+          Login to Your Account
+        </h1>
 
-    return (
-        <div className="flex justify-center items-center min-h-screen bg-base-200 ">
-            <div className="w-full max-w-lg p-8 rounded-xl shadow-lg bg-white">
-                <h1 className="text-3xl font-bold mb-6 text-center">Login to Your Account</h1>
-               
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <input
+            type="email"
+            {...register('email')}
+            placeholder="Email"
+            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            readOnly={!!emailFromState}
+          />
+          {errors.email && (
+            <span className="text-sm text-red-600">{errors.email.message}</span>
+          )}
 
-                    <input
-                        type="email"
-                        {...register('email')}
-                        placeholder="Email"
-                        className='input border border-gray-300 rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg '
-                        readOnly={!!emailFromState} 
-                    />
-                    {errors.email && (
-                        <span className="text-sm  text-red-700">{errors.email.message}</span>
-                    )}
+          <input
+            type="password"
+            {...register('password')}
+            placeholder="Password"
+            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+          />
+          {errors.password && (
+            <span className="text-sm text-red-600">{errors.password.message}</span>
+          )}
 
-                    <input
-                        type="password"
-                        {...register('password')}
-                        placeholder="Password"
-                        className='input border border-gray-300 rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg '
-                    />
-                    {errors.password && (
-                        <span className="text-sm text-red-700">{errors.password.message}</span>
-                    )}
+          <button
+            type="submit"
+            className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 rounded-lg transition"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <span className="loading loading-bars loading-md" /> Logging in...
+              </>
+            ) : (
+              'Login'
+            )}
+          </button>
+        </form>
 
-                    <button type="submit" className="btn btn-primary w-full mt-4" disabled={isLoading}>
-                        {isLoading ? (
-                                <>
-                                    <span className="loading loading-bars loading-xl" /> Logging in...
-                                </>
-                            ) : "Login"}
-                    </button>
-                </form>
-                <div className="mt-6 flex flex-col items-center space-y-2">
-                    <p className="text-gray-600">
-                        Don't have an account?{' '}
-                        <a href="/register" className="text-blue-600 hover:underline">
-                            Register
-                        </a>
-                    </p>
-                    <p className="text-gray-600">
-                        <a href="/" className="text-blue-600 hover:underline">
-                            Back to Home
-                        </a>
-                    </p>
-                </div>
-            </div>
+        <div className="mt-6 flex flex-col items-center space-y-2">
+          <p className="text-amber-900">
+            Don't have an account?{' '}
+            <a href="/register" className="text-amber-700 hover:underline">
+              Register
+            </a>
+          </p>
+          <p className="text-amber-900">
+            <a href="/" className="text-amber-700 hover:underline">
+              Back to Home
+            </a>
+          </p>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Login;
