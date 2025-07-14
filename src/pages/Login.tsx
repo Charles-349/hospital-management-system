@@ -49,7 +49,7 @@ function Login() {
       );
       console.log('Login successful:', response);
       toast.success('Login successful! Redirecting to dashboard...');
-      navigate('/dashboard');
+      navigate('/admin/dashboard');
     } catch (error) {
       console.error('Login failed. Please check your credentials and try again.', error);
       toast.error('Login failed. Please check your credentials and try again.');

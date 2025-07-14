@@ -25,12 +25,12 @@ const Navbar = () => {
                                 </li> 
                           
                                 <li className="font-bold text-lg">
-                                     <NavLink to="/dashboard">
+                                     <NavLink to="/admin/dashboard">
                                     Dashboard
                                 </NavLink>
                                 </li>
                                    <li className="font-bold text-lg">
-                                     <NavLink to="/services">Contacts</NavLink>
+                                     <NavLink to="/contacts">Contacts</NavLink>
                                 </li>
                                  
                                     <>
