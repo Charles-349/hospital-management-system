@@ -11,6 +11,10 @@ import UserDashboard from './dashboard/UserDashboard/UserDashboard'
 import DoctorDashboard from './dashboard/DoctorDashboard/DoctorDashboard'
 import { useSelector } from 'react-redux'
 import type { RootState } from './app/store'
+import Users from './dashboard/AdminDashboard/manageUsers/Users'
+import Profile from './dashboard/Profile'
+import ContactPage from './pages/ContactPage'
+
 
 
 
@@ -27,6 +31,10 @@ function App() {
     {
       path: '/about',
       element: <AboutPage />
+    },
+     {
+      path: '/contact',
+      element: <ContactPage/>,
     },
      {
       path: '/register',
@@ -100,11 +108,11 @@ function App() {
         },
            {
           path: 'users',
-          element: <h1>Users</h1>
+          element: <Users/>
         },
          {
           path: 'profile',
-          element: <h1>Profile</h1>
+          element: <Profile/>
         },
         {
           path: 'analytics',

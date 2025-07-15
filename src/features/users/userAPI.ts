@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { APIDomain } from '../../utils/APIDomain';
-// import type { RootState } from '../../app/store';
+import type { RootState } from '../../app/store';
+
 
 export type TUser = {
     userID: number; 
@@ -23,6 +24,14 @@ export const userAPI = createApi({
     reducerPath: 'userAPI',
     baseQuery: fetchBaseQuery({
         baseUrl : APIDomain,
+         prepareHeaders: (headers, {getState}) => {
+                  const token = (getState() as RootState).user.token;
+                  if (token) {
+                      headers.set('Authorization', `Bearer ${token}`);
+                  }
+                  headers.set('Content-Type', 'application/json');
+                  return headers;
+              } 
     }),
     tagTypes: ['Users'],
     endpoints: (builder) => ({
@@ -42,6 +51,24 @@ export const userAPI = createApi({
             }),
             invalidatesTags: ['Users'],
         }),
+         getUsers: builder.query<TUser[], void>({
+    query: () => '/user',
+    transformResponse: (response: { users: TUser[] }) => response.users, 
+    providesTags: ['Users'],
+}),
+
+    updateUser: builder.mutation<TUser, Partial<TUser> & { userID: number }>({
+            query: (updatedUser) => ({
+                url: `/user/${updatedUser.userID}`,
+                method: 'PUT',
+                body: updatedUser,
+            }),
+            invalidatesTags: ['Users']
+        }),
+       getUserById: builder.query<{ user: TUser }, number>({
+    query: (userID) => `/user/${userID}`,
+    providesTags: ['Users'],
+}),
 
     }),
 })
