@@ -9,12 +9,16 @@ import { Toaster } from 'sonner'
 import AdminDashboard from './dashboard/AdminDashboard/AdminDashboard'
 import UserDashboard from './dashboard/UserDashboard/UserDashboard'
 import DoctorDashboard from './dashboard/DoctorDashboard/DoctorDashboard'
+import { useSelector } from 'react-redux'
+import type { RootState } from './app/store'
 
 
 
 
 function App() {
- 
+  const isAdmin = useSelector((state: RootState) => state.user.user?.role === 'admin');
+  const isUser = useSelector((state: RootState) => state.user.user?.role === 'user');
+  const isDoctor = useSelector((state: RootState) => state.user.user?.role === 'doctor');
   const router = createBrowserRouter([
     {
       path: '/',
@@ -38,7 +42,7 @@ function App() {
     },
     {
       path: '/user/dashboard',
-      element:<UserDashboard /> ,
+      element:isUser ? <UserDashboard /> : <Login />,
       children: [
        
          {
@@ -73,7 +77,7 @@ function App() {
 
     {
       path: '/admin/dashboard',
-      element:<AdminDashboard /> ,
+      element: isAdmin ? <AdminDashboard /> : <Login />,
       children: [
        
          {
@@ -111,7 +115,7 @@ function App() {
 
     {
       path: '/doctor/dashboard',
-      element:<DoctorDashboard /> ,
+      element:isDoctor ? <DoctorDashboard /> : <Login />,
       children: [
        
          {

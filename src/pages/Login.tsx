@@ -49,7 +49,13 @@ function Login() {
       );
       console.log('Login successful:', response);
       toast.success('Login successful! Redirecting to dashboard...');
-      navigate('/admin/dashboard');
+      if (response.user.role === 'admin') {
+        navigate('/admin/dashboard');
+      } else if (response.user.role === 'doctor') {
+        navigate('/doctor/dashboard');
+      } else {
+        navigate('/user/dashboard');
+      }
     } catch (error) {
       console.error('Login failed. Please check your credentials and try again.', error);
       toast.error('Login failed. Please check your credentials and try again.');

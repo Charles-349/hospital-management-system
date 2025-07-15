@@ -1,10 +1,15 @@
 
+import { useSelector } from 'react-redux';
 import logo from '../../assets/images/medlog.jpg';
 import { NavLink } from 'react-router-dom';
+import type { RootState } from '../../app/store';
 
 
 const Navbar = () => {
-    
+    const userrole = useSelector((state: RootState) =>state.user.user?.role );
+    const userToken = useSelector((state: RootState) => state.user.token);
+    const isAdmin = userrole === 'admin'; 
+    const isDoctor = userrole === 'doctor'; 
     return (
         <div>
             <div className="navbar bg-base-700 shadow-sm h-25 bg-blue-500">
@@ -25,14 +30,14 @@ const Navbar = () => {
                                 </li> 
                           
                                 <li className="font-bold text-lg">
-                                     <NavLink to="/admin/dashboard">
+                                     <NavLink to={isAdmin ? '/admin/dashboard' : isDoctor ? '/doctor/dashboard' : '/user/dashboard'}>
                                     Dashboard
                                 </NavLink>
                                 </li>
                                    <li className="font-bold text-lg">
                                      <NavLink to="/contacts">Contacts</NavLink>
                                 </li>
-                                 
+                                   {!userToken && (
                                     <>
                                         <li className="font-bold text-lg list-none">
                                             <NavLink to="/register">Register</NavLink>
@@ -41,7 +46,7 @@ const Navbar = () => {
                                             <NavLink to="/login">Login</NavLink>
                                         </li>
                                     </>
-                              
+                              )}
                             </ul>
                         </ul>
                     </div>
@@ -58,12 +63,12 @@ const Navbar = () => {
                             <NavLink to="/about">About</NavLink>
                         </li>
                         <li className="font-bold text-lg"> 
-                                <NavLink to="/dashboard">
+                                <NavLink to={isAdmin ? '/admin/dashboard' : isDoctor ? '/doctor/dashboard' : '/user/dashboard'}>
                                     Dashboard
                                 </NavLink>
                         </li>
                         <li className="font-bold text-lg"> 
-                            <NavLink to="/services">Services</NavLink>
+                            <NavLink to="/contacts">Contacts</NavLink>
                         </li>
 
                     </ul>
@@ -71,6 +76,7 @@ const Navbar = () => {
                 <div className="navbar-end">
                     <div className='flex gap-4 mr-4'>
                      
+                                    {!userToken && (
                                     <>
                                         <li className="font-bold text-lg list-none">
                                             <NavLink to="/register">Register</NavLink>
@@ -79,6 +85,7 @@ const Navbar = () => {
                                             <NavLink to="/login">Login</NavLink>
                                         </li>
                                     </>
+                              )}
                              
                     </div>
                    
