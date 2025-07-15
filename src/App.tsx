@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import VerifyUser from './pages/VerifyUser'
 import { Toaster } from 'sonner'
 import AdminDashboard from './dashboard/AdminDashboard/AdminDashboard'
+import UserDashboard from './dashboard/UserDashboard/UserDashboard'
+import DoctorDashboard from './dashboard/DoctorDashboard/DoctorDashboard'
 
 
 
@@ -35,6 +37,41 @@ function App() {
       element: <VerifyUser />,
     },
     {
+      path: '/user/dashboard',
+      element:<UserDashboard /> ,
+      children: [
+       
+         {
+          path: 'appointments',
+          element: <h1>Appointments</h1>
+        },
+        
+          {
+          path: 'payments',
+          element: <h1>Payments</h1>
+        },
+
+          {
+          path: 'prescriptions',
+          element: <h1>Prescriptions</h1>
+        },
+         {
+          path: 'complaints',
+          element: <h1>Complaints</h1>
+        },
+       
+         {
+          path: 'profile',
+          element: <h1>Profile</h1>
+        },
+        {
+          path: 'analytics',
+          element: <h1>Analytics</h1>
+        },
+      ]
+    },
+
+    {
       path: '/admin/dashboard',
       element:<AdminDashboard /> ,
       children: [
@@ -61,6 +98,36 @@ function App() {
           path: 'users',
           element: <h1>Users</h1>
         },
+         {
+          path: 'profile',
+          element: <h1>Profile</h1>
+        },
+        {
+          path: 'analytics',
+          element: <h1>Analytics</h1>
+        },
+      ]
+    },
+
+    {
+      path: '/doctor/dashboard',
+      element:<DoctorDashboard /> ,
+      children: [
+       
+         {
+          path: 'appointments',
+          element: <h1>Appointments</h1>
+        },
+
+          {
+          path: 'prescriptions',
+          element: <h1>Prescriptions</h1>
+        },
+         {
+          path: 'complaints',
+          element: <h1>Complaints</h1>
+        },
+       
          {
           path: 'profile',
           element: <h1>Profile</h1>
