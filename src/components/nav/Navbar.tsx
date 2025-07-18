@@ -15,7 +15,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     return (
         <div>
-            <div className="navbar bg-base-700 shadow-sm h-25 bg-blue-500">
+            <div className="navbar bg-base-700 shadow-sm h-25 bg-gradient-to-br from-blue-700 via-blue-500 to-blue-500">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

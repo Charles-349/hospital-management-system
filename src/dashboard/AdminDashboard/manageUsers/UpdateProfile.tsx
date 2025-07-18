@@ -184,7 +184,7 @@ const UpdateProfile = ({ user, refetch }: UpdateProfileProps) => {
                             type="file" 
                             accept="image/*" 
                             onChange={handleImageUpload}
-                            className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                            className="file-input file-input-bordered file-input-primary w-full max-w-xs bg-white text-gray-800"
                         />
 
                         {

@@ -14,6 +14,10 @@ import type { RootState } from './app/store'
 import Users from './dashboard/AdminDashboard/manageUsers/Users'
 import Profile from './dashboard/Profile'
 import ContactPage from './pages/ContactPage'
+import Appointments from './dashboard/AdminDashboard/apppointments/Appointments'
+import Payments from './dashboard/AdminDashboard/payments/Payments'
+import Complaints from './dashboard/AdminDashboard/complaints/Complaints'
+import Prescriptions from './dashboard/AdminDashboard/prescription/Prescription'
 
 
 
@@ -74,7 +78,7 @@ function App() {
        
          {
           path: 'profile',
-          element: <h1>Profile</h1>
+          element: <Profile/>
         },
         {
           path: 'analytics',
@@ -90,21 +94,21 @@ function App() {
        
          {
           path: 'appointments',
-          element: <h1>Appointments</h1>
+          element: <Appointments/>
         },
         
           {
           path: 'payments',
-          element: <h1>Payments</h1>
+          element: <Payments/>
         },
 
           {
           path: 'prescriptions',
-          element: <h1>Prescriptions</h1>
+          element: <Prescriptions/>
         },
          {
           path: 'complaints',
-          element: <h1>Complaints</h1>
+          element: <Complaints/>
         },
            {
           path: 'users',
@@ -142,7 +146,7 @@ function App() {
        
          {
           path: 'profile',
-          element: <h1>Profile</h1>
+          element: <Profile/>
         },
         {
           path: 'analytics',

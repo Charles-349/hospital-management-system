@@ -53,9 +53,9 @@ const VerifyUser = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-yellow-900 via-amber-700 to-yellow-800">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-800">
       <div className="w-full max-w-md p-8 rounded-xl shadow-2xl bg-white">
-        <h1 className="text-3xl font-extrabold mb-6 text-center text-amber-800">
+        <h1 className="text-3xl font-extrabold mb-6 text-center text-blue-800">
           Verify Your Account
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -63,7 +63,7 @@ const VerifyUser = () => {
             type="email"
             {...register('email')}
             placeholder="Email"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
             readOnly={!!emailFromState}
           />
           {errors.email && (
@@ -75,7 +75,7 @@ const VerifyUser = () => {
             {...register('code')}
             placeholder="6 Digit Code"
             maxLength={6}
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.code && (
             <span className="text-red-600 text-sm">{errors.code.message}</span>
@@ -83,7 +83,7 @@ const VerifyUser = () => {
 
           <button
             type="submit"
-            className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 rounded-lg transition"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition"
             disabled={isSubmitting}
           >
             {isLoading ? (
@@ -95,9 +95,9 @@ const VerifyUser = () => {
             )}
           </button>
         </form>
-        <p className="mt-6 text-center text-amber-900">
+        <p className="mt-6 text-center text-blue-900">
           Already verified?{' '}
-          <a href="/login" className="text-amber-700 hover:underline">
+          <a href="/login" className="text-blue-700 hover:underline">
             Login here
           </a>
         </p>

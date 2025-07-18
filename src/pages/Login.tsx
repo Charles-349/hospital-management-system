@@ -63,9 +63,9 @@ function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-yellow-900 via-amber-700 to-yellow-800">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-800">
       <div className="w-full max-w-lg p-8 rounded-xl shadow-2xl bg-white">
-        <h1 className="text-3xl font-extrabold mb-6 text-center text-amber-800">
+        <h1 className="text-3xl font-extrabold mb-6 text-center text-blue-800">
           Login to Your Account
         </h1>
 
@@ -74,7 +74,7 @@ function Login() {
             type="email"
             {...register('email')}
             placeholder="Email"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
             readOnly={!!emailFromState}
           />
           {errors.email && (
@@ -85,7 +85,7 @@ function Login() {
             type="password"
             {...register('password')}
             placeholder="Password"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.password && (
             <span className="text-sm text-red-600">{errors.password.message}</span>
@@ -93,7 +93,7 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 rounded-lg transition"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -107,14 +107,14 @@ function Login() {
         </form>
 
         <div className="mt-6 flex flex-col items-center space-y-2">
-          <p className="text-amber-900">
+          <p className="text-blue-900">
             Don't have an account?{' '}
-            <a href="/register" className="text-amber-700 hover:underline">
+            <a href="/register" className="text-blue-700 hover:underline">
               Register
             </a>
           </p>
-          <p className="text-amber-900">
-            <a href="/" className="text-amber-700 hover:underline">
+          <p className="text-blue-900">
+            <a href="/" className="text-blue-700 hover:underline">
               Back to Home
             </a>
           </p>

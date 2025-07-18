@@ -58,9 +58,9 @@ function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-yellow-900 via-amber-700 to-yellow-800">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-800">
       <div className="w-full max-w-lg p-8 rounded-xl shadow-2xl bg-white">
-        <h1 className="text-3xl font-extrabold mb-6 text-center text-amber-800">
+        <h1 className="text-3xl font-extrabold mb-6 text-center text-blue-800">
           Create Your Account
         </h1>
 
@@ -69,7 +69,7 @@ function Register() {
             type="text"
             {...register('firstName')}
             placeholder="First Name"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.firstName && (
             <span className="text-red-600 text-sm">{errors.firstName.message}</span>
@@ -79,7 +79,7 @@ function Register() {
             type="text"
             {...register('lastName')}
             placeholder="Last Name"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.lastName && (
             <span className="text-red-600 text-sm">{errors.lastName.message}</span>
@@ -89,7 +89,7 @@ function Register() {
             type="email"
             {...register('email')}
             placeholder="Email"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.email && (
             <span className="text-red-600 text-sm">{errors.email.message}</span>
@@ -99,7 +99,7 @@ function Register() {
             type="number"
             {...register('contactPhone')}
             placeholder="Phone Number"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.contactPhone && (
             <span className="text-red-600 text-sm">{errors.contactPhone.message}</span>
@@ -109,7 +109,7 @@ function Register() {
             type="text"
             {...register('address')}
             placeholder="Address"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.address && (
             <span className="text-red-600 text-sm">{errors.address.message}</span>
@@ -119,7 +119,7 @@ function Register() {
             type="password"
             {...register('password')}
             placeholder="Password"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.password && (
             <span className="text-red-600 text-sm">{errors.password.message}</span>
@@ -129,7 +129,7 @@ function Register() {
             type="password"
             {...register('confirmPassword')}
             placeholder="Confirm Password"
-            className="input border border-amber-300 rounded w-full p-3 focus:ring-2 focus:ring-amber-600 text-lg"
+            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
           />
           {errors.confirmPassword && (
             <span className="text-red-600 text-sm">{errors.confirmPassword.message}</span>
@@ -137,7 +137,7 @@ function Register() {
 
           <button
             type="submit"
-            className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 rounded-lg transition"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -150,9 +150,9 @@ function Register() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-amber-900">
+        <p className="mt-6 text-center text-blue-900">
           Already have an account?{' '}
-          <a href="/login" className="text-amber-700 hover:underline">
+          <a href="/login" className="text-blue-700 hover:underline">
             Login
           </a>
         </p>
