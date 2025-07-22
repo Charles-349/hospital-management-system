@@ -95,7 +95,7 @@ const DoctorPrescriptions = () => {
 
       <table className="table">
         <thead>
-          <tr>
+          <tr className="bg-gray-700 text-white text-md lg:text-lg">
             <th>ID</th>
             <th>Appointment</th>
             <th>User</th>

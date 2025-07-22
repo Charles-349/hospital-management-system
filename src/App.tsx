@@ -26,6 +26,8 @@ import UserDoctors from './dashboard/UserDashboard/doctor/Doctor'
 import DoctorAppointments from './dashboard/DoctorDashboard/appointment/DoctorAppointment'
 import AdminDoctors from './dashboard/AdminDashboard/doctor/AdminDoctor'
 import DoctorPrescriptions from './dashboard/DoctorDashboard/prescription/Prescription'
+import Analytics from './dashboard/AdminDashboard/analytics/Analysis'
+import DoctorAnalysis from './dashboard/DoctorDashboard/analytics/Analysis'
 
 
 
@@ -91,10 +93,6 @@ function App() {
           path: 'profile',
           element: <Profile/>
         },
-        {
-          path: 'analytics',
-          element: <h1>Analytics</h1>
-        },
       ]
     },
 
@@ -135,7 +133,7 @@ function App() {
         },
         {
           path: 'analytics',
-          element: <h1>Analytics</h1>
+          element:<Analytics/>
         },
       ]
     },
@@ -154,10 +152,6 @@ function App() {
           path: 'prescriptions',
           element: <DoctorPrescriptions/>
         },
-         {
-          path: 'complaints',
-          element: <h1>Complaints</h1>
-        },
        
          {
           path: 'profile',
@@ -165,7 +159,7 @@ function App() {
         },
         {
           path: 'analytics',
-          element: <h1>Analytics</h1>
+          element: <DoctorAnalysis/>
         },
       ]
     },

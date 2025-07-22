@@ -1,6 +1,5 @@
 import { TbBrandBooking } from "react-icons/tb";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
-import { FaEnvelopeOpenText } from "react-icons/fa6";
 import { FaUserCheck } from "react-icons/fa6";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 
@@ -18,19 +17,12 @@ export const doctorDrawerData: DrawerData[] = [
         icon: TbBrandBooking ,
         link: 'appointments'
     },
-     
    
      {
         id: 'prescriptions',
         name: 'Prescriptions',
         icon: FaPrescriptionBottleAlt,
         link: 'prescriptions'
-    },
-     {
-        id: 'complaints',
-        name: 'Complaints',
-        icon:  FaEnvelopeOpenText,
-        link: 'complaints'
     },
     {
         id: 'profile',
