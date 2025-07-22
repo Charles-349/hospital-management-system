@@ -1,4 +1,5 @@
 
+import Contact from "../components/contact/Contact"
 import Footer from "../components/footer/Footer"
 import Hero from "../components/home/Hero"
 import Navbar from "../components/nav/Navbar"
@@ -9,6 +10,7 @@ const LandingPage = () => {
     <div>
        <Navbar/>
        <Hero />
+       <Contact/>
        <Footer/>
        
     </div>

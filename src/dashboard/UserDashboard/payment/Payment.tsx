@@ -1,22 +1,43 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import CreatePayment from "./CreatePayment";
-import UpdatePayment from "./UpdatePayment";
-import DeletePayment from "./DeletePayment";
 import { toast } from "sonner";
 import { paymentsAPI, type TPayment } from "../../../features/payment/paymentsAPI";
+import { appointmentsAPI, type TAppointment } from "../../../features/appointments/appointmentsAPI";
+import CreatePayment from "../../AdminDashboard/payments/CreatePayment";
+import UpdatePayment from "../../AdminDashboard/payments/UpdatePayment";
+import DeletePayment from "../../AdminDashboard/payments/DeletePayment";
+import type { RootState } from "../../../app/store";
 
-const Payments = () => {
+const UserPayments = () => {
   const [selectedPayment, setSelectedPayment] = useState<TPayment | null>(null);
   const [paymentToDelete, setPaymentToDelete] = useState<TPayment | null>(null);
+  const [paymentAppointment] = useState<TAppointment | null>(null);
 
-  const [searchId, setSearchId] = useState("");
+  const [searchPaymentID, setSearchPaymentID] = useState("");
   const [searchResult, setSearchResult] = useState<TPayment | null>(null);
 
-  const [getPaymentById] = paymentsAPI.useLazyGetPaymentByIdQuery();
+  const userID = useSelector((state: RootState) => state.user.user?.userID);
 
-  const { data: paymentsData, isLoading, error, refetch } = paymentsAPI.useGetPaymentsQuery(undefined, {
+  const { data: userAppointmentsData } = appointmentsAPI.useGetAppointmentsByUserIdQuery(userID ?? 0, {
+    skip: !userID,
+  });
+
+  const [getPaymentById] = paymentsAPI.useLazyGetPaymentByIdQuery();
+ 
+
+ 
+  const userAppointmentIDs = userAppointmentsData?.appointments?.map(
+    (appt: TAppointment) => appt.appointmentID
+  ) || [];
+
+  const {
+    data: paymentsData,
+    isLoading,
+    error,
+    refetch,
+  } = paymentsAPI.useGetPaymentsQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 10000,
     refetchOnFocus: true,
@@ -24,20 +45,27 @@ const Payments = () => {
   });
 
   const handleSearch = async () => {
-    if (!searchId.trim()) return;
+    setSearchResult(null);
+
+    if (!searchPaymentID.trim()) {
+      toast.info("Enter a Payment ID to search.");
+      return;
+    }
     try {
-      const result = await getPaymentById(parseInt(searchId)).unwrap();
+      const result = await getPaymentById(parseInt(searchPaymentID)).unwrap();
       if (!result.payment) {
-        toast.error("Payment not found.");
-        setSearchResult(null);
+      toast.error("Payment not found.");
+      } else if (!userAppointmentIDs.includes(result.payment.appointmentID)) {
+      toast.error("You can only view your own payments.");
       } else {
-        setSearchResult(result.payment);
+      setSearchResult(result.payment);
       }
     } catch (err) {
       console.error(err);
       toast.error("Payment not found.");
-      setSearchResult(null);
     }
+     
+    
   };
 
   const handleEdit = (payment: TPayment) => {
@@ -53,12 +81,12 @@ const Payments = () => {
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{payment.transactionID}</td>
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{payment.paymentDate}</td>
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">
-                <span className={`badge ${payment.paymentStatus? "badge-success" : "badge-warning"}`}>
-                    <span className={`lg:text-base ${payment.paymentStatus ? "text-green-700" : "text-yellow-700"}`}>
-                        {payment.paymentStatus ? "Paid" : "Pending"}
-                    </span>
-                </span>
-            </td>
+        <span className={`badge ${payment.paymentStatus ? "badge-success" : "badge-warning"}`}>
+          <span className={payment.paymentStatus ? "text-green-700" : "text-yellow-700"}>
+            {payment.paymentStatus ? "Paid" : "Pending"}
+          </span>
+        </span>
+      </td>
       <td className="flex">
         <button
           className="btn btn-sm btn-primary mr-4 text-blue-500"
@@ -79,20 +107,23 @@ const Payments = () => {
     </tr>
   );
 
+  const filteredPayments = paymentsData?.payments?.filter((p) =>
+    userAppointmentIDs.includes(p.appointmentID)
+  ) || [];
+
   return (
     <div>
-      <CreatePayment refetch={refetch}  appointment={null}/>
+      <CreatePayment refetch={refetch} appointment={paymentAppointment} />
       <UpdatePayment payment={selectedPayment} refetch={refetch} />
       <DeletePayment payment={paymentToDelete} refetch={refetch} />
 
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 mt-4 gap-3">
-
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
-            value={searchId}
-            onChange={(e) => setSearchId(e.target.value)}
-            placeholder="Search Payment by ID"
+            value={searchPaymentID}
+            onChange={(e) => setSearchPaymentID(e.target.value)}
+            placeholder="Search by Payment ID"
             className="input input-bordered p-2 rounded-md bg-white"
           />
           <button className="btn btn-primary bg-white text-black" onClick={handleSearch}>
@@ -120,16 +151,19 @@ const Payments = () => {
           <tbody>
             {searchResult
               ? renderPaymentRow(searchResult)
-              : paymentsData?.payments?.map(renderPaymentRow)}
+              : filteredPayments.map(renderPaymentRow)}
           </tbody>
         </table>
       </div>
 
-      {!searchResult && paymentsData?.payments?.length === 0 && !isLoading && (
+      {!searchResult && filteredPayments.length === 0 && !isLoading && (
         <p>No Payments Found.</p>
       )}
     </div>
   );
 };
 
-export default Payments;
+export default UserPayments;
+
+
+

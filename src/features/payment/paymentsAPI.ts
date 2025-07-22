@@ -43,6 +43,14 @@ export const paymentsAPI = createApi({
       query: (paymentID) => `/payment/${paymentID}`,
       providesTags: ["Payments"],
     }),
+    getPaymentsByAppointmentId: builder.query<{ payments: TPayment[] }, number>({
+      query: (appointmentID) => `/payment/appointment/${appointmentID}`,
+      providesTags: ["Payments"],
+    }),
+    getPaymentsByUserId: builder.query<{ payments: TPayment[] }, number>({
+      query: (userID) => `/payment/user/${userID}`,
+      providesTags: ["Payments"],
+    }),
     updatePayment: builder.mutation<TPayment, Partial<TPayment> & { paymentID: number }>({
       query: (updatedPayment) => ({
         url: `/payment/${updatedPayment.paymentID}`,

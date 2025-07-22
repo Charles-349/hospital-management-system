@@ -18,6 +18,14 @@ import Appointments from './dashboard/AdminDashboard/apppointments/Appointments'
 import Payments from './dashboard/AdminDashboard/payments/Payments'
 import Complaints from './dashboard/AdminDashboard/complaints/Complaints'
 import Prescriptions from './dashboard/AdminDashboard/prescription/Prescription'
+import UserAppointments from './dashboard/UserDashboard/appointment/Appointment'
+import UserPayments from './dashboard/UserDashboard/payment/Payment'
+import UserComplaints from './dashboard/UserDashboard/complaint/UserComplaint'
+import UserPrescriptions from './dashboard/UserDashboard/prescription/UserPrescription'
+import UserDoctors from './dashboard/UserDashboard/doctor/Doctor'
+import DoctorAppointments from './dashboard/DoctorDashboard/appointment/DoctorAppointment'
+import AdminDoctors from './dashboard/AdminDashboard/doctor/AdminDoctor'
+import DoctorPrescriptions from './dashboard/DoctorDashboard/prescription/Prescription'
 
 
 
@@ -59,23 +67,26 @@ function App() {
        
          {
           path: 'appointments',
-          element: <h1>Appointments</h1>
+          element: <UserAppointments/>
         },
         
           {
           path: 'payments',
-          element: <h1>Payments</h1>
+          element: <UserPayments/>
         },
 
           {
           path: 'prescriptions',
-          element: <h1>Prescriptions</h1>
+          element: <UserPrescriptions/>
         },
          {
           path: 'complaints',
-          element: <h1>Complaints</h1>
+          element: <UserComplaints/>
         },
-       
+       {
+          path: 'doctors',
+          element: <UserDoctors/>
+        },
          {
           path: 'profile',
           element: <Profile/>
@@ -110,6 +121,10 @@ function App() {
           path: 'complaints',
           element: <Complaints/>
         },
+          {
+          path: 'doctors',
+          element: <AdminDoctors/>
+        },
            {
           path: 'users',
           element: <Users/>
@@ -132,12 +147,12 @@ function App() {
        
          {
           path: 'appointments',
-          element: <h1>Appointments</h1>
+          element: <DoctorAppointments/>
         },
 
           {
           path: 'prescriptions',
-          element: <h1>Prescriptions</h1>
+          element: <DoctorPrescriptions/>
         },
          {
           path: 'complaints',

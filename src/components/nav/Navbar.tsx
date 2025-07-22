@@ -68,7 +68,7 @@ const Navbar = () => {
                     </div>
 
 
-                    <img src={logo} alt="" className="w-30 h-26 ml-8 hidden sm:block " />
+                    <img src={logo} alt="" className="w-20 h-20 ml-8 hidden sm:block rounded-lg" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 ">

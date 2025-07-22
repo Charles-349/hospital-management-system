@@ -9,6 +9,7 @@ import { appointmentsAPI } from "../features/appointments/appointmentsAPI";
 import { paymentsAPI } from "../features/payment/paymentsAPI";
 import { complaintsAPI } from "../features/complaint/complaintsAPI";
 import { prescriptionsAPI } from "../features/prescription/prescriptionsAPI";
+import { doctorsAPI } from "../features/doctor/doctorsAPI";
 
 const persistConfig = {
     key: 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     [paymentsAPI.reducerPath]: paymentsAPI.reducer,
     [complaintsAPI.reducerPath]: complaintsAPI.reducer,
     [prescriptionsAPI.reducerPath]:prescriptionsAPI.reducer,
+    [doctorsAPI.reducerPath]:doctorsAPI.reducer,
     user: userSlice,
 
 
@@ -38,6 +40,7 @@ export const store = configureStore({
         .concat(paymentsAPI.middleware)
         .concat(complaintsAPI.middleware)
         .concat(prescriptionsAPI.middleware)
+        .concat(doctorsAPI.middleware)
 
 });
 export const persistedStore = persistStore(store)

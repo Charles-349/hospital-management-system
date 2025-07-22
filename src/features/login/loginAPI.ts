@@ -5,6 +5,7 @@ export type TLoginResponse = {
     token: string;
     user: {
         userID: number;
+        doctorID?: number | null;
         firstName: string;
         lastName: string;
         email: string;

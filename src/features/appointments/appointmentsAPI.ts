@@ -10,6 +10,7 @@ export type TAppointment = {
   appointmentDate: string;
   timeSlot: string;
   totalAmount: number | null;
+  appointmentStatus: "Pending" | "Confirmed";
 };
 
 export const appointmentsAPI = createApi({

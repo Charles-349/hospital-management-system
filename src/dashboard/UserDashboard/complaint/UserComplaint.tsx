@@ -1,54 +1,68 @@
 
 import { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 import { toast } from "sonner";
+import { useSelector } from "react-redux";
 import { complaintsAPI, type TComplaint } from "../../../features/complaint/complaintsAPI";
-import DeleteComplaint from "./DeleteComplaint";
+import DeleteComplaint from "../../AdminDashboard/complaints/DeleteComplaint";
+import UpdateComplaint from "./UpdateComplaint";
+import type { RootState } from "../../../app/store";
+import CreateComplaint from "./CreatePayment";
 
-const Complaints = () => {
-  const [searchUserID, setSearchUserID] = useState("");
+const UserComplaints = () => {
+  const userID = useSelector((state: RootState) => state.user.user?.userID);
+
   const [searchAppointmentID, setSearchAppointmentID] = useState("");
+  const [searchComplaintID, setSearchComplaintID] = useState("");
   const [searchResult, setSearchResult] = useState<TComplaint[] | null>(null);
+
   const [complaintToDelete, setComplaintToDelete] = useState<TComplaint | null>(null);
+  const [complaintToUpdate, setComplaintToUpdate] = useState<TComplaint | null>(null);
 
-  const { data: complaintsData, isLoading, error, refetch } = complaintsAPI.useGetComplaintsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 10000,
-  });
+  const { data: complaintsData, isLoading, error, refetch } =
+    complaintsAPI.useGetComplaintsByUserIdQuery(userID ?? 0, {
+      skip: !userID,
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 10000,
+    });
 
-  const [getByUserId] = complaintsAPI.useLazyGetComplaintsByUserIdQuery();
   const [getByAppointmentId] = complaintsAPI.useLazyGetComplaintsByAppointmentIdQuery();
+  const [getByComplaintId] = complaintsAPI.useLazyGetComplaintByIdQuery();
   const [updateComplaintStatus] = complaintsAPI.useUpdateComplaintMutation();
 
   const handleSearch = async () => {
-    if (searchUserID.trim()) {
+    setSearchResult(null);
+
+    if (searchComplaintID.trim()) {
       try {
-        const result = await getByUserId(parseInt(searchUserID)).unwrap();
-        if (!result.complaints || result.complaints.length === 0) {
-          toast.error("No complaints found for this user.");
-          setSearchResult(null);
+        const result = await getByComplaintId(parseInt(searchComplaintID)).unwrap();
+        if (!result.complaint) {
+          toast.error("Complaint not found.");
+        } else if (result.complaint.userID !== userID) {
+          toast.error("You can only view your own complaints.");
         } else {
-          setSearchResult(result.complaints);
+          setSearchResult([result.complaint]);
         }
-      } catch (err) {
-        toast.error("No complaints found for this user.");
-        setSearchResult(null);
+      } catch {
+        toast.error("Complaint not found.");
       }
     } else if (searchAppointmentID.trim()) {
       try {
         const result = await getByAppointmentId(parseInt(searchAppointmentID)).unwrap();
-        if (!result.complaints || result.complaints.length === 0) {
+        const ownComplaints = result.complaints.filter(
+          (c) => c.userID === userID
+        );
+        if (ownComplaints.length === 0) {
           toast.error("No complaints found for this appointment.");
-          setSearchResult(null);
         } else {
-          setSearchResult(result.complaints);
+          setSearchResult(ownComplaints);
         }
-      } catch (err) {
+      } catch {
         toast.error("No complaints found for this appointment.");
-        setSearchResult(null);
       }
     } else {
-      toast.error("Enter a User ID or Appointment ID to search.");
+      toast.error("Enter a Complaint ID or Appointment ID to search.");
     }
   };
 
@@ -57,7 +71,7 @@ const Complaints = () => {
       await updateComplaintStatus({ complaintID, status: newStatus }).unwrap();
       toast.success(`Complaint marked as ${newStatus}`);
       refetch();
-    } catch (err) {
+    } catch {
       toast.error(`Failed to mark as ${newStatus}`);
     }
   };
@@ -95,7 +109,16 @@ const Complaints = () => {
           Closed
         </button>
         <button
-          className="btn btn-sm btn-danger text-red-500"
+          className="btn btn-xs btn-info text-blue-600"
+          onClick={() => {
+            setComplaintToUpdate(complaint);
+            (document.getElementById("update_complaint_modal") as HTMLDialogElement)?.showModal();
+          }}
+        >
+          <FaEdit size={16} />
+        </button>
+        <button
+          className="btn btn-xs btn-danger text-red-500"
           onClick={() => {
             setComplaintToDelete(complaint);
             (document.getElementById("delete_complaint_modal") as HTMLDialogElement)?.showModal();
@@ -109,15 +132,25 @@ const Complaints = () => {
 
   return (
     <div>
+      <CreateComplaint refetch={refetch} />
+      <UpdateComplaint complaint={complaintToUpdate} refetch={refetch} />
       <DeleteComplaint complaint={complaintToDelete} refetch={refetch} />
 
-      {/* Search */}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 mb-4 mt-4">
+      <div className="flex flex-wrap gap-4 mb-4">
+        <button
+          className="btn bg-gray-700 text-white"
+          onClick={() =>
+            (document.getElementById("create_complaint_modal") as HTMLDialogElement)?.showModal()
+          }
+        >
+          Create Complaint
+        </button>
+
         <input
           type="text"
-          value={searchUserID}
-          onChange={(e) => setSearchUserID(e.target.value)}
-          placeholder="Search by User ID"
+          value={searchComplaintID}
+          onChange={(e) => setSearchComplaintID(e.target.value)}
+          placeholder="Search by Complaint ID"
           className="input input-bordered input-sm text-black bg-white"
         />
         <input
@@ -127,10 +160,7 @@ const Complaints = () => {
           placeholder="Search by Appointment ID"
           className="input input-bordered input-sm text-black bg-white"
         />
-        <button
-          className="btn btn-sm bg-white text-black"
-          onClick={handleSearch}
-        >
+        <button className="btn btn-sm bg-white text-black" onClick={handleSearch}>
           Search
         </button>
       </div>
@@ -142,7 +172,7 @@ const Complaints = () => {
         <table className="table table-xs">
           <thead>
             <tr className="bg-gray-600 text-white text-md lg:text-lg">
-              <th>Complaint ID</th>
+              <th>ID</th>
               <th>User ID</th>
               <th>Appointment ID</th>
               <th>Subject</th>
@@ -165,4 +195,6 @@ const Complaints = () => {
   );
 };
 
-export default Complaints;
+export default UserComplaints;
+
+

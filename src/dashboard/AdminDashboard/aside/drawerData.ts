@@ -7,39 +7,45 @@ import { FaUserCheck } from "react-icons/fa6";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 
 export type DrawerData = {
-    id:string;
-    name:string;
-    icon:React.ComponentType<{size?: number}>;
-    link:string
-} 
+    id: string;
+    name: string;
+    icon: React.ComponentType<{ size?: number }>;
+    link: string
+}
 export const adminDrawerData: DrawerData[] = [
-    
-     {
+
+    {
         id: 'appointments',
         name: 'Appointments',
-        icon: TbBrandBooking ,
+        icon: TbBrandBooking,
         link: 'appointments'
     },
-     {
+    {
         id: 'payments',
         name: 'Payments',
-        icon: MdPayments ,
+        icon: MdPayments,
         link: 'payments'
     },
-   
-     {
+
+    {
         id: 'prescriptions',
         name: 'Prescriptions',
         icon: FaPrescriptionBottleAlt,
         link: 'prescriptions'
     },
-     {
+    {
         id: 'complaints',
         name: 'Complaints',
-        icon:  FaEnvelopeOpenText,
+        icon: FaEnvelopeOpenText,
         link: 'complaints'
     },
-  
+    {
+        id: 'doctors',
+        name: 'Doctors',
+        icon: FiUsers,
+        link: 'doctors'
+    },
+
     {
         id: 'users',
         name: 'Users',
@@ -49,13 +55,13 @@ export const adminDrawerData: DrawerData[] = [
     {
         id: 'profile',
         name: 'Profile',
-        icon: FaUserCheck ,
+        icon: FaUserCheck,
         link: 'profile'
     },
     {
         id: 'analytics',
         name: 'Analytics',
-        icon: TbBrandGoogleAnalytics ,
+        icon: TbBrandGoogleAnalytics,
         link: 'analytics'
     },
 ]

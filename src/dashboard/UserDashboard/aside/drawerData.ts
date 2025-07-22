@@ -1,9 +1,10 @@
 import { TbBrandBooking } from "react-icons/tb";
-import { MdPayments } from "react-icons/md";;
+import { MdPayments } from "react-icons/md";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
 import { FaEnvelopeOpenText } from "react-icons/fa6";
 import { FaUserCheck } from "react-icons/fa6";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
+import { FiUsers } from "react-icons/fi";
 
 export type DrawerData = {
     id:string;
@@ -38,6 +39,12 @@ export const userDrawerData: DrawerData[] = [
         icon:  FaEnvelopeOpenText,
         link: 'complaints'
     },
+      {
+            id: 'doctors',
+            name: 'Doctors',
+            icon: FiUsers,
+            link: 'doctors'
+        },
     {
         id: 'profile',
         name: 'Profile',

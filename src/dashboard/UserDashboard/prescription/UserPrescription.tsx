@@ -1,57 +1,46 @@
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteForever } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { toast } from "sonner";
-import UpdatePrescription from "./UpdatePrescription";
-import DeletePrescription from "./DeletePrescription";
 import { prescriptionsAPI, type TPrescription } from "../../../features/prescription/prescriptionsAPI";
+import type { RootState } from "../../../app/store";
 
-const Prescriptions = () => {
-  const [searchUserID, setSearchUserID] = useState("");
+const UserPrescriptions = () => {
+  const userID = useSelector((state: RootState) => state.user.user?.userID);
+
   const [searchAppointmentID, setSearchAppointmentID] = useState("");
   const [searchResult, setSearchResult] = useState<TPrescription[] | null>(null);
-  const [selectedPrescription, setSelectedPrescription] = useState<TPrescription | null>(null);
-  const [prescriptionToDelete, setPrescriptionToDelete] = useState<TPrescription | null>(null);
 
-  const { data: prescriptionsData, isLoading, error, refetch } = prescriptionsAPI.useGetPrescriptionsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 10000,
-  });
+  const { data: prescriptionsData, isLoading, error } = prescriptionsAPI.useGetPrescriptionsByUserIdQuery(
+    userID ?? 0,
+    {
+      skip: !userID,
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 10000,
+    }
+  );
 
-  const [getByUserId] = prescriptionsAPI.useLazyGetPrescriptionsByUserIdQuery();
   const [getByAppointmentId] = prescriptionsAPI.useLazyGetPrescriptionsByAppointmentIdQuery();
 
   const handleSearch = async () => {
-    if (searchUserID.trim()) {
-      try {
-        const result = await getByUserId(parseInt(searchUserID)).unwrap();
-        if (!result.prescriptions || result.prescriptions.length === 0) {
-          toast.error("No prescriptions found for this user.");
-          setSearchResult(null);
-        } else {
-          setSearchResult(result.prescriptions);
-        }
-      } catch (err) {
-        console.error(err);
-        toast.error("No prescriptions found for this user.");
-        setSearchResult(null);
-      }
-    } else if (searchAppointmentID.trim()) {
+    setSearchResult(null);
+
+    if (searchAppointmentID.trim()) {
       try {
         const result = await getByAppointmentId(parseInt(searchAppointmentID)).unwrap();
-        if (!result.prescriptions || result.prescriptions.length === 0) {
+        const ownPrescriptions = result.prescriptions.filter(
+          (p) => p.userID === userID
+        );
+
+        if (ownPrescriptions.length === 0) {
           toast.error("No prescriptions found for this appointment.");
-          setSearchResult(null);
         } else {
-          setSearchResult(result.prescriptions);
+          setSearchResult(ownPrescriptions);
         }
-      } catch (err) {
-        console.error(err);
+      } catch {
         toast.error("No prescriptions found for this appointment.");
-        setSearchResult(null);
       }
     } else {
-      toast.info("Enter a User ID or Appointment ID to search.");
+      toast.info("Enter an Appointment ID to search.");
     }
   };
 
@@ -62,43 +51,13 @@ const Prescriptions = () => {
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{prescription.doctorID}</td>
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{prescription.appointmentID}</td>
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{prescription.notes || "-"}</td>
-      <td className="flex gap-2">
-        <button
-          className="btn btn-sm btn-primary text-blue-600"
-          onClick={() => {
-            setSelectedPrescription(prescription);
-            (document.getElementById("update_prescription_modal") as HTMLDialogElement)?.showModal();
-          }}
-        >
-          <FaEdit size={18} />
-        </button>
-        <button
-          className="btn btn-sm btn-danger text-red-500"
-          onClick={() => {
-            setPrescriptionToDelete(prescription);
-            (document.getElementById("delete_prescription_modal") as HTMLDialogElement)?.showModal();
-          }}
-        >
-          <MdDeleteForever size={20} />
-        </button>
-      </td>
     </tr>
   );
 
   return (
     <div className="w-full">
-      <UpdatePrescription prescription={selectedPrescription} refetch={refetch} />
-      <DeletePrescription prescription={prescriptionToDelete} refetch={refetch} />
-
-      {/* Search Controls */}
+    
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6 mt-4">
-        <input
-          type="text"
-          value={searchUserID}
-          onChange={(e) => setSearchUserID(e.target.value)}
-          placeholder="Search by User ID"
-          className="input input-bordered bg-white text-black"
-        />
         <input
           type="text"
           value={searchAppointmentID}
@@ -123,7 +82,6 @@ const Prescriptions = () => {
               <th>Doctor ID</th>
               <th>Appointment ID</th>
               <th>Notes</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -141,4 +99,4 @@ const Prescriptions = () => {
   );
 };
 
-export default Prescriptions;
+export default UserPrescriptions;

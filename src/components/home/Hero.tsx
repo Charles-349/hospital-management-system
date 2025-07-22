@@ -1,13 +1,31 @@
 
 import { useNavigate } from 'react-router-dom';
 import heroIMG from '../../assets/images/hospitalhero.jpg';
+import type { RootState } from '../../app/store';
+import { useSelector } from 'react-redux';
 
 export const Hero = () => {
   const navigate = useNavigate();
-
-  const goToAbout = () => {
-    navigate('/login'); 
-  };
+const userrole = useSelector((state: RootState) => state.user.user?.role);
+        const userToken = useSelector((state: RootState) => state.user.token);
+  const goToLogin = () => {
+    
+  //   if (!localStorage.getItem('userToken')) {
+  //     navigate('/login');
+  //   } else {
+  //     navigate('/appointments');
+  //   }
+  // };
+ if (!userToken) {
+    navigate('/login');
+  } else if (userrole === 'admin') {
+    navigate('/admin/dashboard');
+  } else if (userrole === 'doctor') {
+    navigate('/doctor/dashboard');
+  } else {
+    navigate('/user/dashboard');
+  }
+};
 
   return (
     <main className="flex flex-col">
@@ -58,11 +76,107 @@ export const Hero = () => {
               Connect with verified, patient-first doctors.
             </p>
           </div>
+           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Easy Payment
+            </h3>
+            <p className="text-gray-700">
+              Secure abd simple payment options for all services
+            </p>
+          </div>
+           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+             Modern Care
+            </h3>
+            <p className="text-gray-700">
+              Experience healthcare with a modern touch
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Hassle-free Appointments
+            </h3>
+            <p className="text-gray-700">
+             Manage your appointments with ease, no more waiting in lines
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Patient-Centric
+            </h3>
+            <p className="text-gray-700">
+              We prioritize patient needs and comfort in every interaction
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+             Book Appointments
+            </h3>
+            <p className="text-gray-700">
+              Schedule your appointments with just a few clicks
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              24/7 Support
+            </h3>
+            <p className="text-gray-700">
+            Our support team is available around the clock to assist you
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+             User-friendly interface
+            </h3>
+            <p className="text-gray-700">
+             Navigate our platform with ease, designed for all ages
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+            Comprehensive services
+            </h3>
+            <p className="text-gray-700">
+             From appointments to payments, we cover all your healthcare needs
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Community Focus
+            </h3>
+            <p className="text-gray-700">
+             We are dedicated to improving community health and well being
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Telemedicine Access
+            </h3>
+            <p className="text-gray-700">
+             Consult with doctors remotely for convinience and safety 
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+            Quick updates
+            </h3>
+            <p className="text-gray-700">
+              Stay informed with real time-updates on your appointments and health records
+            </p>
+          </div>
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Personalized Reminders
+            </h3>
+            <p className="text-gray-700">
+            Never miss an appointment with timely notifications tailored for you.
+            </p>
+          </div>
         </div>
 
         <div className="relative z-10 flex justify-center items-center w-full ">
           <button
-            onClick={goToAbout}
+            onClick={goToLogin}
             className="btn btn-primary rounded-full px-8"
           >
             Book Appointment
