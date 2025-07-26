@@ -71,6 +71,7 @@ function Login() {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input
+            data-test="login-email-input"
             type="email"
             {...register('email')}
             placeholder="Email"
@@ -82,6 +83,7 @@ function Login() {
           )}
 
           <input
+            data-test="login-password-input"
             type="password"
             {...register('password')}
             placeholder="Password"
@@ -92,6 +94,7 @@ function Login() {
           )}
 
           <button
+            data-test="login-submit-button"
             type="submit"
             className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition"
             disabled={isLoading}

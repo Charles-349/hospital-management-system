@@ -68,7 +68,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-10 text-center text-sm text-teal-100">
-        © {new Date().getFullYear()} MediBook. All rights reserved.
+        © {new Date().getFullYear()} SmartCare. All rights reserved.
       </div>
     </footer>
   );

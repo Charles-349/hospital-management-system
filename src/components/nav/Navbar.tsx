@@ -18,12 +18,12 @@ const Navbar = () => {
             <div className="navbar bg-base-700 shadow-sm h-25 bg-gradient-to-br from-blue-700 via-blue-500 to-blue-500">
                 <div className="navbar-start">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden" data-test="medical-mobile-menu-bars">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                         </div>
                         <ul
 
-                            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-base-content bg-gray-700 h-[60vh]">
+                            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-base-content bg-gray-700 h-[60vh] "data-test="medical-ul-menu">
                             <ul className="menu  px-1">
                                 <li className="font-bold text-lg">
                                     <NavLink to="/">Home</NavLink>
@@ -76,14 +76,14 @@ const Navbar = () => {
                             <NavLink to="/">Home</NavLink>
                         </li>
                         <li className="font-bold text-lg">
-                            <NavLink to="/about">About</NavLink>
+                            <NavLink to="/about" data-test="desktop-nav-about">About</NavLink>
                         </li>
                         <li className="font-bold text-lg">
                             <NavLink to={isAdmin ? '/admin/dashboard' : isDoctor ? '/doctor/dashboard' : '/user/dashboard'}>
                                 Dashboard
                             </NavLink>
                         </li>
-                        <li className="font-bold text-lg">
+                        <li className="font-bold text-lg" data-test="desktop-nav-contact">
                             <NavLink to="/contact">Contacts</NavLink>
                         </li>
 
@@ -95,9 +95,9 @@ const Navbar = () => {
                         {!userToken && (
                             <>
                                 <li className="font-bold text-lg list-none">
-                                    <NavLink to="/register">Register</NavLink>
+                                    <NavLink to="/register" data-test="desktop-nav-register">Register</NavLink>
                                 </li>
-                                <li className="font-bold text-lg list-none">
+                                <li className="font-bold text-lg list-none" data-test="desktop-nav-login">
                                     <NavLink to="/login">Login</NavLink>
                                 </li></>)}
 

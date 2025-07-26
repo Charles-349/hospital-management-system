@@ -29,7 +29,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
 
         <div className="relative z-10 max-w-3xl mb-12 text-left">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4" data-test="medical-introduction-header">
             SmartCare — Smart Patient Care
           </h1>
           <p className="text-white text-lg md:text-xl mb-4 max-w-xl">
