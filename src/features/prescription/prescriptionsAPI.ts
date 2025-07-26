@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { APIDomain } from "../../utils/APIDomain";
 import type { RootState } from "../../app/store";
 
-// Prescription Type
+
 export type TPrescription = {
   prescriptionID: number;
   appointmentID: number;

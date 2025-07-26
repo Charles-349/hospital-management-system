@@ -6,26 +6,19 @@ import { useSelector } from 'react-redux';
 
 export const Hero = () => {
   const navigate = useNavigate();
-const userrole = useSelector((state: RootState) => state.user.user?.role);
-        const userToken = useSelector((state: RootState) => state.user.token);
+  const userrole = useSelector((state: RootState) => state.user.user?.role);
+  const userToken = useSelector((state: RootState) => state.user.token);
   const goToLogin = () => {
-    
-  //   if (!localStorage.getItem('userToken')) {
-  //     navigate('/login');
-  //   } else {
-  //     navigate('/appointments');
-  //   }
-  // };
- if (!userToken) {
-    navigate('/login');
-  } else if (userrole === 'admin') {
-    navigate('/admin/dashboard');
-  } else if (userrole === 'doctor') {
-    navigate('/doctor/dashboard');
-  } else {
-    navigate('/user/dashboard');
-  }
-};
+    if (!userToken) {
+      navigate('/login');
+    } else if (userrole === 'admin') {
+      navigate('/admin/dashboard');
+    } else if (userrole === 'doctor') {
+      navigate('/doctor/dashboard');
+    } else {
+      navigate('/user/dashboard');
+    }
+  };
 
   return (
     <main className="flex flex-col">
@@ -37,7 +30,7 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
 
         <div className="relative z-10 max-w-3xl mb-12 text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
-            MediBook — Smart Patient Care
+            SmartCare — Smart Patient Care
           </h1>
           <p className="text-white text-lg md:text-xl mb-4 max-w-xl">
             Book appointments, manage records, and provide modern care with ease.
@@ -76,7 +69,7 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               Connect with verified, patient-first doctors.
             </p>
           </div>
-           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold mb-2 text-gray-800">
               Easy Payment
             </h3>
@@ -84,9 +77,9 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               Secure abd simple payment options for all services
             </p>
           </div>
-           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
+          <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold mb-2 text-gray-800">
-             Modern Care
+              Modern Care
             </h3>
             <p className="text-gray-700">
               Experience healthcare with a modern touch
@@ -97,7 +90,7 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               Hassle-free Appointments
             </h3>
             <p className="text-gray-700">
-             Manage your appointments with ease, no more waiting in lines
+              Manage your appointments with ease, no more waiting in lines
             </p>
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
@@ -110,7 +103,7 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold mb-2 text-gray-800">
-             Book Appointments
+              Book Appointments
             </h3>
             <p className="text-gray-700">
               Schedule your appointments with just a few clicks
@@ -121,23 +114,23 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               24/7 Support
             </h3>
             <p className="text-gray-700">
-            Our support team is available around the clock to assist you
+              Our support team is available around the clock to assist you
             </p>
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold mb-2 text-gray-800">
-             User-friendly interface
+              User-friendly interface
             </h3>
             <p className="text-gray-700">
-             Navigate our platform with ease, designed for all ages
+              Navigate our platform with ease, designed for all ages
             </p>
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold mb-2 text-gray-800">
-            Comprehensive services
+              Comprehensive services
             </h3>
             <p className="text-gray-700">
-             From appointments to payments, we cover all your healthcare needs
+              From appointments to payments, we cover all your healthcare needs
             </p>
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
@@ -145,7 +138,7 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               Community Focus
             </h3>
             <p className="text-gray-700">
-             We are dedicated to improving community health and well being
+              We are dedicated to improving community health and well being
             </p>
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
@@ -153,12 +146,12 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               Telemedicine Access
             </h3>
             <p className="text-gray-700">
-             Consult with doctors remotely for convinience and safety 
+              Consult with doctors remotely for convinience and safety
             </p>
           </div>
           <div className="p-6 bg-white/90 backdrop-blur-sm border rounded-lg shadow hover:shadow-lg transition">
             <h3 className="text-xl font-semibold mb-2 text-gray-800">
-            Quick updates
+              Quick updates
             </h3>
             <p className="text-gray-700">
               Stay informed with real time-updates on your appointments and health records
@@ -169,7 +162,7 @@ const userrole = useSelector((state: RootState) => state.user.user?.role);
               Personalized Reminders
             </h3>
             <p className="text-gray-700">
-            Never miss an appointment with timely notifications tailored for you.
+              Never miss an appointment with timely notifications tailored for you.
             </p>
           </div>
         </div>

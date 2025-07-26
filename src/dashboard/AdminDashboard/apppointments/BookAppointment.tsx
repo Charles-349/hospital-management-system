@@ -103,10 +103,10 @@ const CreateAppointment = ({ refetch }: CreateAppointmentProps) => {
             <button type="submit" className="btn btn-primary" disabled={isLoading}>
               {isLoading ? (
                 <>
-                  <span className="loading loading-bars loading-xl" /> Creating...
+                  <span className="loading loading-bars loading-xl" /> Booking...
                 </>
               ) : (
-                "Create"
+                "Book"
               )}
             </button>
             <button

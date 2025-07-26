@@ -27,7 +27,7 @@ export const paymentsAPI = createApi({
   }),
   tagTypes: ["Payments"],
   endpoints: (builder) => ({
-    createPayment: builder.mutation<TPayment, Partial<TPayment>>({
+       createPayment: builder.mutation<TPayment, Partial<TPayment>>({
       query: (newPayment) => ({
         url: "/payment",
         method: "POST",
@@ -35,6 +35,7 @@ export const paymentsAPI = createApi({
       }),
       invalidatesTags: ["Payments"],
     }),
+
     getPayments: builder.query<{ payments: TPayment[] }, void>({
       query: () => "/payment",
       providesTags: ["Payments"],
