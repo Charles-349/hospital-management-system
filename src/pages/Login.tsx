@@ -51,11 +51,11 @@ function Login() {
       console.log('Login successful:', response);
       toast.success('Login successful! Redirecting to dashboard...');
       if (response.user.role === 'admin') {
-        navigate('/admin/dashboard');
+        navigate('/admin/dashboard/appointments');
       } else if (response.user.role === 'doctor') {
-        navigate('/doctor/dashboard');
+        navigate('/doctor/dashboard/appointments');
       } else {
-        navigate('/user/dashboard');
+        navigate('/user/dashboard/appointments');
       }
     } catch (error) {
       console.error('Login failed. Please check your credentials and try again.', error);
