@@ -30,7 +30,7 @@ describe("login functionility", () => {
             .click()
 
         cy.contains("Login successful! Redirecting to dashboard...").should('be.visible')
-        cy.url().should("include", '/admin/dashboard')
+        cy.url().should("include", '/admin/dashboard/appointments')
 
 
     })

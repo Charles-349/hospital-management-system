@@ -5,7 +5,6 @@ import LandingPage from './pages/LandingPage'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import VerifyUser from './pages/VerifyUser'
-import { Toaster } from 'sonner'
 import AdminDashboard from './dashboard/AdminDashboard/AdminDashboard'
 import UserDashboard from './dashboard/UserDashboard/UserDashboard'
 import DoctorDashboard from './dashboard/DoctorDashboard/DoctorDashboard'
@@ -28,6 +27,7 @@ import AdminDoctors from './dashboard/AdminDashboard/doctor/AdminDoctor'
 import DoctorPrescriptions from './dashboard/DoctorDashboard/prescription/Prescription'
 import Analytics from './dashboard/AdminDashboard/analytics/Analysis'
 import DoctorAnalysis from './dashboard/DoctorDashboard/analytics/Analysis'
+import { Toaster } from 'sonner'
 
 
 
