@@ -30,7 +30,7 @@ function Contact() {
 
   const onSubmit: SubmitHandler<ContactInputs> = async (data) => {
     try {
-      const response = await fetch('http://localhost:8081/api/contact', {
+      const response = await fetch('https://medical-appointment-n1p3.onrender.com/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
