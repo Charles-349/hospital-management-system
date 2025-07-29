@@ -4,7 +4,6 @@ import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "sonner";
 import type { RootState } from "../../../app/store";
-import CreatePrescription from "./CreatePrescription";
 import { prescriptionsAPI, type TPrescription } from "../../../features/prescription/prescriptionsAPI";
 import UpdatePrescription from "../../AdminDashboard/prescription/UpdatePrescription";
 import DeletePrescription from "../../AdminDashboard/prescription/DeletePrescription";
@@ -79,16 +78,6 @@ const DoctorPrescriptions = () => {
         <button className="btn btn-primary" onClick={handleSearch}>
           Search
         </button>
-        <button
-          className="btn btn-success"
-          onClick={() =>
-            (document.getElementById(
-              "create_prescription_modal"
-            ) as HTMLDialogElement).showModal()
-          }
-        >
-          Add Prescription
-        </button>
       </div>
 
       {isLoading && <p>Loading...</p>}
@@ -134,13 +123,6 @@ const DoctorPrescriptions = () => {
           ))}
         </tbody>
       </table>
-
-      <CreatePrescription
-        refetch={refetch}
-        appointmentID={1}
-        doctorID={doctorID ?? 0}
-        userID={1}
-      />
     </div>
   );
 };

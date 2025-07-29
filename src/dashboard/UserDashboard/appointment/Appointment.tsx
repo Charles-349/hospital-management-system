@@ -322,13 +322,13 @@ const UserAppointments = () => {
       <CreatePayment
         refetch={refetch}
         appointment={paymentAppointment}
-        onPaymentCreated={handlePaymentCreated} 
+        onPaymentCreated={handlePaymentCreated}
       />
       <InitiateMpesaPayment
         appointment={paymentAppointment}
         paymentID={mpesaPaymentID}
         amount={mpesaAmount}
-        refetch={refetch} 
+        refetch={refetch}
       />
       <UpdateAppointment appointment={selectedAppointment} refetch={refetch} />
       <DeleteAppointment appointment={appointmentToDelete} refetch={refetch} />
@@ -439,12 +439,14 @@ const UserAppointments = () => {
                       </td>
                       <td className="flex">
                         <button
+                          data-test="edit-todo-button"
                           className="btn btn-sm btn-primary mr-4 text-blue-500"
                           onClick={() => handleEdit(appointment)}
                         >
                           <FaEdit size={20} />
                         </button>
                         <button
+                          data-test="delete-appointment-button"
                           className="btn btn-sm btn-danger text-red-500"
                           onClick={() => {
                             setAppointmentToDelete(appointment);

@@ -48,7 +48,7 @@ const Users = () => {
             <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{user.role}</td>
             <td className="px-4 py-2 border-r border-gray-400 lg:text-base">
                 <span className={`badge ${user.isVerified ? "badge-success" : "badge-warning"}`}>
-                    <span className={`lg:text-base ${user.isVerified ? "text-green-700" : "text-yellow-700"}`}>
+                    <span className={`lg:text-base ${user.isVerified ? "text-green-700" : "text-yellow-700 text-sm"}`}>
                         {user.isVerified ? "Verified" : "Not Verified"}
                     </span>
                 </span>

@@ -3,12 +3,15 @@ import { useSelector } from "react-redux";
 import { toast } from "sonner";
 import { appointmentsAPI, type TAppointment } from "../../../features/appointments/appointmentsAPI";
 import type { RootState } from "../../../app/store";
-// import CreatePrescription from "../prescription/CreatePrescription";
+import CreatePrescription from "../prescription/CreatePrescription";
+
 
 const DoctorAppointments = () => {
   const [searchAppointmentID, setSearchAppointmentID] = useState("");
   const [searchUserID, setSearchUserID] = useState("");
   const [searchResults, setSearchResults] = useState<TAppointment[] | null>(null);
+  const [selectedAppointment, setSelectedAppointment] = useState<TAppointment | null>(null);
+
 
   const doctorID = useSelector((state: RootState) => state.user.user?.doctorID);
 
@@ -20,6 +23,7 @@ const DoctorAppointments = () => {
     data: appointmentsData,
     isLoading,
     error,
+    refetch,
   } = appointmentsAPI.useGetAppointmentsByDoctorIdQuery(doctorID ?? 0, {
     skip: !doctorID,
     refetchOnMountOrArgChange: true,
@@ -67,12 +71,13 @@ const DoctorAppointments = () => {
 
   return (
     <div>
-       {/* <CreatePrescription
+      <CreatePrescription
         refetch={refetch}
-        appointmentID={1}
+        appointmentID={selectedAppointment?.appointmentID}
         doctorID={doctorID ?? 0}
-        userID={1}
-      /> */}
+        userID={selectedAppointment?.userID}
+      />
+
       <div className="flex flex-wrap gap-2 mb-4 mt-4">
         <input
           type="text"
@@ -123,14 +128,16 @@ const DoctorAppointments = () => {
                 <td className="flex">
                   <button
                     className="btn btn-success"
-                    onClick={() =>
-                      (document.getElementById(
-                        "create_prescription_modal"
-                      ) as HTMLDialogElement).showModal()
-                    }
+                    onClick={() => {
+                      setSelectedAppointment(appt);
+                      (
+                        document.getElementById("create_prescription_modal") as HTMLDialogElement
+                      )?.showModal();
+                    }}
                   >
                     Prescribe
                   </button>
+
                 </td>
               </tr>
             ))}

@@ -54,7 +54,7 @@ const UserDashboard = () => {
                 <UserDrawer />
                     </div>
                 </aside>
-                <main className="flex-1 p-4 bg-blue-300 min-h-screen">
+                <main className="flex-1 p-4  min-h-screen bg-gray-200">
                     <Outlet />
                 </main>
             </div>

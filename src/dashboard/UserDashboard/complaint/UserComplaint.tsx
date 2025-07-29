@@ -29,7 +29,7 @@ const UserComplaints = () => {
 
   const [getByAppointmentId] = complaintsAPI.useLazyGetComplaintsByAppointmentIdQuery();
   const [getByComplaintId] = complaintsAPI.useLazyGetComplaintByIdQuery();
-  const [updateComplaintStatus] = complaintsAPI.useUpdateComplaintMutation();
+  // const [updateComplaintStatus] = complaintsAPI.useUpdateComplaintMutation();
 
   const handleSearch = async () => {
     setSearchResult(null);
@@ -66,15 +66,15 @@ const UserComplaints = () => {
     }
   };
 
-  const handleStatusChange = async (complaintID: number, newStatus: string) => {
-    try {
-      await updateComplaintStatus({ complaintID, status: newStatus }).unwrap();
-      toast.success(`Complaint marked as ${newStatus}`);
-      refetch();
-    } catch {
-      toast.error(`Failed to mark as ${newStatus}`);
-    }
-  };
+  // const handleStatusChange = async (complaintID: number, newStatus: string) => {
+  //   try {
+  //     await updateComplaintStatus({ complaintID, status: newStatus }).unwrap();
+  //     toast.success(`Complaint marked as ${newStatus}`);
+  //     refetch();
+  //   } catch {
+  //     toast.error(`Failed to mark as ${newStatus}`);
+  //   }
+  // };
 
   const renderComplaintRow = (complaint: TComplaint) => (
     <tr key={complaint.complaintID} className="hover:bg-gray-300 border-b border-gray-400">
@@ -84,7 +84,7 @@ const UserComplaints = () => {
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{complaint.subject}</td>
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{complaint.status}</td>
       <td className="flex flex-wrap gap-1">
-        <button
+        {/* <button
           className="btn btn-xs btn-primary"
           onClick={() => handleStatusChange(complaint.complaintID, "Open")}
         >
@@ -107,7 +107,7 @@ const UserComplaints = () => {
           onClick={() => handleStatusChange(complaint.complaintID, "Closed")}
         >
           Closed
-        </button>
+        </button> */}
         <button
           className="btn btn-xs btn-info text-blue-600"
           onClick={() => {

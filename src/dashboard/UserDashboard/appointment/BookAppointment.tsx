@@ -8,8 +8,8 @@ import { appointmentsAPI } from "../../../features/appointments/appointmentsAPI"
 
 type CreateAppointmentProps = {
   refetch: () => void;
-  prefillDoctorID?: number; 
-  prefillUserID?: number;  
+  prefillDoctorID?: number;
+  prefillUserID?: number;
 };
 
 type CreateAppointmentInputs = {
@@ -35,13 +35,13 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
     register,
     handleSubmit,
     reset,
-    setValue, 
+    setValue,
     formState: { errors },
   } = useForm<CreateAppointmentInputs>({
     resolver: yupResolver(schema),
   });
 
- 
+
   useEffect(() => {
     if (prefillDoctorID) setValue("doctorID", prefillDoctorID);
     if (prefillUserID) setValue("userID", prefillUserID);
@@ -82,6 +82,7 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
           {errors.doctorID && <span className="text-sm text-red-700">{errors.doctorID.message}</span>}
 
           <input
+            data-test="appointment-date-input"
             type="date"
             {...register("appointmentDate")}
             className="input rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg bg-white text-gray-800"
@@ -91,6 +92,7 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
           )}
 
           <input
+            data-test="appointment-time-input"
             type="time"
             {...register("timeSlot")}
             className="input rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg bg-white text-gray-800"
@@ -100,6 +102,7 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
           )}
 
           <input
+            data-test="appointment-totalAmount-input"
             type="number"
             step="0.01"
             {...register("totalAmount")}
@@ -111,7 +114,9 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
           )}
 
           <div className="modal-action">
-            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+            <button 
+            data-test="appointment-submit-button"
+            type="submit" className="btn btn-primary" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <span className="loading loading-bars loading-xl" /> Booking...

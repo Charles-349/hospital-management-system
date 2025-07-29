@@ -45,6 +45,7 @@ const UserDoctors = () => {
       <td className="px-4 py-2 border-r border-gray-400 lg:text-base">{doctor.availableDays || "-"}</td>
       <td>
         <button
+          data-test="book-appointment-button"
           className="btn bg-gray-600 text-white hover:bg-gray-700 border border-gray-400 rounded-lg px-4 py-2 text-lg"
           onClick={() => {
             setSelectedDoctor(doctor);
@@ -65,7 +66,7 @@ const UserDoctors = () => {
         prefillUserID={userID}
       />
 
-      
+
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6 mt-4">
         <input
           type="text"

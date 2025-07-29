@@ -58,86 +58,94 @@ function Register() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-800">
-      <div className="w-full max-w-lg p-8 rounded-xl shadow-2xl bg-white">
-        <h1 className="text-3xl font-extrabold mb-6 text-center text-blue-800">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-tr from-purple-900 via-indigo-800 to-blue-900 px-4">
+      <div className="w-full max-w-2xl p-10 bg-base-100 rounded-2xl shadow-2xl animate-pulse animate-fade-up animate-infinite animate-duration-[3000ms] animate-ease-in-out animate-delay-200 animate-alternate">
+        <h1 className="text-4xl font-bold text-center text-accent mb-8 animate-jump animate-delay-300">
           Create Your Account
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <input
+            data-test="signup-firstname"
             type="text"
             {...register('firstName')}
             placeholder="First Name"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.firstName && (
-            <span className="text-red-600 text-sm">{errors.firstName.message}</span>
+            <p className="text-error text-sm mt-1">{errors.firstName.message}</p>
           )}
 
           <input
+            data-test="signup-lastname"
             type="text"
             {...register('lastName')}
             placeholder="Last Name"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.lastName && (
-            <span className="text-red-600 text-sm">{errors.lastName.message}</span>
+            <p className="text-error text-sm mt-1">{errors.lastName.message}</p>
           )}
 
           <input
+            data-test="signup-email"
             type="email"
             {...register('email')}
             placeholder="Email"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.email && (
-            <span className="text-red-600 text-sm">{errors.email.message}</span>
+            <p className="text-error text-sm mt-1">{errors.email.message}</p>
           )}
 
           <input
-            type="number"
+            data-test="signup-contactPhone"
+            type="text"
             {...register('contactPhone')}
             placeholder="Phone Number"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.contactPhone && (
-            <span className="text-red-600 text-sm">{errors.contactPhone.message}</span>
+            <p className="text-error text-sm mt-1">{errors.contactPhone.message}</p>
           )}
 
           <input
+            data-test="signup-address"
             type="text"
             {...register('address')}
             placeholder="Address"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.address && (
-            <span className="text-red-600 text-sm">{errors.address.message}</span>
+            <p className="text-error text-sm mt-1">{errors.address.message}</p>
           )}
 
           <input
+            data-test="signup-password"
             type="password"
             {...register('password')}
             placeholder="Password"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.password && (
-            <span className="text-red-600 text-sm">{errors.password.message}</span>
+            <p className="text-error text-sm mt-1">{errors.password.message}</p>
           )}
 
           <input
+            data-test="signup-confirmpassword"
             type="password"
             {...register('confirmPassword')}
             placeholder="Confirm Password"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
+            className="input input-bordered input-accent w-full text-base"
           />
           {errors.confirmPassword && (
-            <span className="text-red-600 text-sm">{errors.confirmPassword.message}</span>
+            <p className="text-error text-sm mt-1">{errors.confirmPassword.message}</p>
           )}
 
           <button
+            data-test="signup-submitbtn"
             type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition"
+            className="btn btn-accent w-full shadow-md hover:scale-105 transition-transform duration-300"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -145,14 +153,14 @@ function Register() {
                 <span className="loading loading-bars loading-md" /> Registering...
               </>
             ) : (
-              "Register"
+              'Register'
             )}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-blue-900">
+        <p className="mt-6 text-center text-accent">
           Already have an account?{' '}
-          <a href="/login" className="text-blue-700 hover:underline">
+          <a href="/login" className="text-accent-content hover:underline">
             Login
           </a>
         </p>
@@ -162,3 +170,4 @@ function Register() {
 }
 
 export default Register;
+

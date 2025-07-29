@@ -39,6 +39,7 @@ const DeleteAppointment = ({ appointment, refetch }: DeleteAppointmentProps) => 
         </p>
         <div className="modal-action flex gap-4">
           <button
+            data-test="confirm-delete-button"
             className="btn btn-error"
             onClick={handleDelete}
             disabled={isLoading}

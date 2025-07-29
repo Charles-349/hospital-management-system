@@ -15,7 +15,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     return (
         <div>
-            <div className="navbar bg-base-700 shadow-sm h-25 bg-gradient-to-br from-blue-700 via-blue-500 to-blue-500">
+            <div className="navbar bg-base-700 shadow-sm h-20 bg-gradient-to-br from-blue-700 via-blue-500 to-blue-500">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden" data-test="medical-mobile-menu-bars">
@@ -23,7 +23,7 @@ const Navbar = () => {
                         </div>
                         <ul
 
-                            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-base-content bg-gray-700 h-[60vh] "data-test="medical-ul-menu">
+                            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow text-base-content bg-gray-700 h-[60vh] " data-test="medical-ul-menu">
                             <ul className="menu  px-1">
                                 <li className="font-bold text-lg">
                                     <NavLink to="/">Home</NavLink>
@@ -31,12 +31,13 @@ const Navbar = () => {
                                 <li className="font-bold text-lg">
                                     <NavLink to="/about">About</NavLink>
                                 </li>
-
+                                {userToken && (
                                 <li className="font-bold text-lg">
                                     <NavLink to={isAdmin ? '/admin/dashboard' : isDoctor ? '/doctor/dashboard' : '/user/dashboard'}>
                                         Dashboard
                                     </NavLink>
                                 </li>
+                                )}
                                 <li className="font-bold text-lg">
                                     <NavLink to="/contact">Contacts</NavLink>
                                 </li>
@@ -68,7 +69,7 @@ const Navbar = () => {
                     </div>
 
 
-                    <img src={logo} alt="" className="w-20 h-20 ml-8 hidden sm:block rounded-lg" />
+                    <img src={logo} alt="" className="w-15 h-15 ml-8 hidden sm:block rounded-lg" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 ">
@@ -78,11 +79,13 @@ const Navbar = () => {
                         <li className="font-bold text-lg">
                             <NavLink to="/about" data-test="desktop-nav-about">About</NavLink>
                         </li>
+                        {userToken && (
                         <li className="font-bold text-lg">
                             <NavLink to={isAdmin ? '/admin/dashboard' : isDoctor ? '/doctor/dashboard' : '/user/dashboard'}>
                                 Dashboard
                             </NavLink>
                         </li>
+                        )}
                         <li className="font-bold text-lg" data-test="desktop-nav-contact">
                             <NavLink to="/contact">Contacts</NavLink>
                         </li>

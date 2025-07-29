@@ -1,14 +1,15 @@
+
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "sonner";
 import { prescriptionsAPI } from "../../../features/prescription/prescriptionsAPI";
-
+import { useEffect } from "react";
 
 type CreatePrescriptionProps = {
   refetch: () => void;
   appointmentID?: number;
-  doctorID?: number;
+  doctorID?: number; 
   userID?: number;
   notes?: string;
 };
@@ -29,7 +30,7 @@ const schema: yup.ObjectSchema<CreatePrescriptionInputs> = yup
   })
   .required();
 
-const CreatePrescription = ({ refetch }: CreatePrescriptionProps) => {
+const CreatePrescription = ({ refetch, appointmentID, userID }: CreatePrescriptionProps) => {
   const [createPrescription, { isLoading }] =
     prescriptionsAPI.useCreatePrescriptionMutation();
 
@@ -40,7 +41,21 @@ const CreatePrescription = ({ refetch }: CreatePrescriptionProps) => {
     formState: { errors },
   } = useForm<CreatePrescriptionInputs>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      appointmentID: appointmentID ?? 0,
+      userID: userID ?? 0,
+      notes: "",
+      
+    },
   });
+
+  useEffect(() => {
+    reset((prev) => ({
+      ...prev,
+      appointmentID: appointmentID ?? 0,
+      userID: userID ?? 0,
+    }));
+  }, [appointmentID, userID, reset]);
 
   const onSubmit: SubmitHandler<CreatePrescriptionInputs> = async (data) => {
     try {
@@ -120,3 +135,4 @@ const CreatePrescription = ({ refetch }: CreatePrescriptionProps) => {
 };
 
 export default CreatePrescription;
+

@@ -97,6 +97,7 @@ const UpdateAppointment = ({ appointment, refetch }: UpdateAppointmentProps) => 
           {errors.doctorID && <span className="text-sm text-red-700">{errors.doctorID.message}</span>}
 
           <input
+            data-test="edit-appointment-date-input"
             type="date"
             {...register("appointmentDate")}
             className="input rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg bg-white text-gray-800"
@@ -106,6 +107,7 @@ const UpdateAppointment = ({ appointment, refetch }: UpdateAppointmentProps) => 
           )}
 
           <input
+            data-test="edit-appointment-time-input"
             type="time"
             {...register("timeSlot")}
             className="input rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg bg-white text-gray-800"
@@ -115,6 +117,7 @@ const UpdateAppointment = ({ appointment, refetch }: UpdateAppointmentProps) => 
           )}
 
           <input
+            data-test="edit-appointment-amount-input"
             type="number"
             step="0.01"
             {...register("totalAmount")}
@@ -126,7 +129,8 @@ const UpdateAppointment = ({ appointment, refetch }: UpdateAppointmentProps) => 
           )}
 
           <div className="modal-action">
-            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+            <button
+              data-test="update-appointment-button" type="submit" className="btn btn-primary" disabled={isLoading}>
               {isLoading ? (
                 <>
                   <span className="loading loading-bars loading-xl" /> Updating...

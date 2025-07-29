@@ -48,64 +48,72 @@ function Contact() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 via-blue-700 to-blue-800">
-      <div className="w-full max-w-lg p-8 rounded-xl shadow-2xl bg-white">
-        <h1 className="text-3xl font-extrabold mb-6 text-center text-blue-800">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-tr from-purple-900 via-indigo-800 to-blue-900 px-4">
+      <div className="w-full max-w-2xl p-10 bg-base-100 rounded-2xl shadow-2xl animate-pulse animate-fade-up animate-infinite animate-duration-[3000ms] animate-ease-in-out animate-delay-200 animate-alternate">
+        <h1 className="text-4xl font-bold text-center text-accent mb-8 animate-jump animate-delay-300">
           Contact Us
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <input
-            type="text"
-            {...register('name')}
-            placeholder="Your Name"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
-          />
-          {errors.name && (
-            <span className="text-red-600 text-sm">{errors.name.message}</span>
-          )}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+            <input
+              type="text"
+              {...register('name')}
+              placeholder="Your Name"
+              className="input input-bordered input-accent w-full text-base"
+            />
+            {errors.name && (
+              <p className="text-error text-sm mt-1">{errors.name.message}</p>
+            )}
+          </div>
 
-          <input
-            type="email"
-            {...register('email')}
-            placeholder="Your Email"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
-          />
-          {errors.email && (
-            <span className="text-red-600 text-sm">{errors.email.message}</span>
-          )}
+          <div>
+            <input
+              type="email"
+              {...register('email')}
+              placeholder="Your Email"
+              className="input input-bordered input-accent w-full text-base"
+            />
+            {errors.email && (
+              <p className="text-error text-sm mt-1">{errors.email.message}</p>
+            )}
+          </div>
 
-          <input
-            type="text"
-            {...register('phone')}
-            placeholder="Phone Number"
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg"
-          />
-          {errors.phone && (
-            <span className="text-red-600 text-sm">{errors.phone.message}</span>
-          )}
+          <div>
+            <input
+              type="text"
+              {...register('phone')}
+              placeholder="Phone Number"
+              className="input input-bordered input-accent w-full text-base"
+            />
+            {errors.phone && (
+              <p className="text-error text-sm mt-1">{errors.phone.message}</p>
+            )}
+          </div>
 
-          <textarea
-            {...register('message')}
-            placeholder="Your Message"
-            rows={5}
-            className="input border border-blue-300 rounded w-full p-3 focus:ring-2 focus:ring-blue-600 text-lg resize-none"
-          />
-          {errors.message && (
-            <span className="text-red-600 text-sm">{errors.message.message}</span>
-          )}
+          <div>
+            <textarea
+              {...register('message')}
+              placeholder="Your Message"
+              rows={5}
+              className="textarea textarea-bordered textarea-accent w-full text-base"
+            />
+            {errors.message && (
+              <p className="text-error text-sm mt-1">{errors.message.message}</p>
+            )}
+          </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition"
+            className="btn btn-accent w-full shadow-md hover:scale-105 transition-transform duration-300"
             disabled={isSubmitting}
           >
             {isSubmitting ? (
               <>
-                <span className="loading loading-bars loading-md" /> Sending...
+                <span className="loading loading-dots loading-md" /> Sending...
               </>
             ) : (
-              "Send Message"
+              'Send Message'
             )}
           </button>
         </form>
