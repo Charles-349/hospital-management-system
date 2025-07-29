@@ -187,7 +187,7 @@ const schema = yup.object({
     .matches(/^2547\d{8}$/, "Use format 2547XXXXXXXX"),
 });
 
-const CreatePayment = ({ refetch, appointment, onPaymentCreated }: CreatePaymentProps) => {
+const CreatePayment = ({ refetch, appointment,onPaymentCreated}: CreatePaymentProps) => {
   const [createPayment, { isLoading }] = paymentsAPI.useCreatePaymentMutation();
 
   const {
