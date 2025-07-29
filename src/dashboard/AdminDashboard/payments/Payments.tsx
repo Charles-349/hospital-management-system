@@ -81,7 +81,7 @@ const Payments = () => {
 
   return (
     <div>
-      <CreatePayment refetch={refetch}  appointment={null}/>
+      <CreatePayment refetch={refetch}  appointment={null} />
       <UpdatePayment payment={selectedPayment} refetch={refetch} />
       <DeletePayment payment={paymentToDelete} refetch={refetch} />
 
