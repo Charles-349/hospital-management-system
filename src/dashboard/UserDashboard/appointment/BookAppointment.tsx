@@ -45,6 +45,7 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
   useEffect(() => {
     if (prefillDoctorID) setValue("doctorID", prefillDoctorID);
     if (prefillUserID) setValue("userID", prefillUserID);
+    setValue("totalAmount", 1000);
   }, [prefillDoctorID, prefillUserID, setValue]);
 
   const onSubmit: SubmitHandler<CreateAppointmentInputs> = async (data) => {
@@ -107,7 +108,8 @@ const CreateAppointment = ({ refetch, prefillDoctorID, prefillUserID }: CreateAp
             step="0.01"
             {...register("totalAmount")}
             placeholder="Total Amount"
-            className="input rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg bg-white text-gray-800"
+            className="input rounded w-full p-2 focus:ring-2 focus:ring-blue-500 text-lg bg-white text-gray-800 "
+            
           />
           {errors.totalAmount && (
             <span className="text-sm text-red-700">{errors.totalAmount.message}</span>

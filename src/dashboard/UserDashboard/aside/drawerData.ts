@@ -2,7 +2,7 @@ import { TbBrandBooking } from "react-icons/tb";
 import { MdPayments } from "react-icons/md";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
 import { FaEnvelopeOpenText } from "react-icons/fa6";
-import { FaUserCheck } from "react-icons/fa6";
+// import { FaUserCheck } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 
 export type DrawerData = {
@@ -44,10 +44,10 @@ export const userDrawerData: DrawerData[] = [
             icon: FiUsers,
             link: 'doctors'
         },
-    {
-        id: 'profile',
-        name: 'Profile',
-        icon: FaUserCheck ,
-        link: 'profile'
-    },
+    // {
+    //     id: 'profile',
+    //     name: 'Profile',
+    //     icon: FaUserCheck ,
+    //     link: 'profile'
+    // },
 ]

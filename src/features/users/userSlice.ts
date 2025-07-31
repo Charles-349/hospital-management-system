@@ -9,6 +9,7 @@ type User = {
   contactPhone: string;
   address: string;
   role: string;
+  image_url?: string;
 };
 
 export type UserState = {

@@ -1,6 +1,6 @@
 import { TbBrandBooking } from "react-icons/tb";
 import { FaPrescriptionBottleAlt } from "react-icons/fa";
-import { FaUserCheck } from "react-icons/fa6";
+// import { FaUserCheck } from "react-icons/fa6";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 
 export type DrawerData = {
@@ -24,12 +24,12 @@ export const doctorDrawerData: DrawerData[] = [
         icon: FaPrescriptionBottleAlt,
         link: 'prescriptions'
     },
-    {
-        id: 'profile',
-        name: 'Profile',
-        icon: FaUserCheck ,
-        link: 'profile'
-    },
+    // {
+    //     id: 'profile',
+    //     name: 'Profile',
+    //     icon: FaUserCheck ,
+    //     link: 'profile'
+    // },
     {
         id: 'analytics',
         name: 'Analytics',
